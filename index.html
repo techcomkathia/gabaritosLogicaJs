@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        body{
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            min-height: 100vh; 
+            margin: 0;
+        }
+        main{
+            
+            width: 700px;
+            background-color: rgb(93, 93, 93);
+            border-radius: 10px;
+            border: 2px solid darkslategray;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        
+        }
+
+        h1{
+            text-align: center;
+            color: white;
+        }
+
+        ol li{
+            color: white;
+            font-size: 20px;
+            margin: 20px;
+        }
+
+        a{
+            padding: 20px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            font-weight: bolder;
+            border-radius: 10px;
+        }
+
+        button{
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px;
+            width: 100%;
+            border: none;
+        }
+
+        a:hover, button:hover{
+            background-color: black;
+            color: white;
+        }
+
+        .resposta{
+            display: none;
+            background-color: black;
+            color: aqua;
+            padding:15px ;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Exercícios aula 01 - Lógica de Programação</h1>
+
+        <ol>
+            <li>
+                Leia dois números e exiba com um alert a soma dos dois.
+                <br> 
+                <Button onclick="mostrarResposta('q1')">Resposta</Button>
+            </li> 
+            <div id="q1" class="resposta">
+                <code>
+                    let num1 = prompt("Digite o primeiro numero") <br>
+                    let num2 = prompt("Digite o segundo numero") <br>
+
+                    num1 = Number(num1)<br>
+                    num2 = Number(num2)<br>
+
+                    soma = num1 + num2 <br>
+
+                    alert('A soma dos dois numeros é ' + soma) <br>
+                </code>
+            </div>
+            <li>
+                Leia o salário de um funcionário e exiba o novo salário deste funcionário com um aumento de 20%
+                <br>
+                <Button onclick="mostrarResposta('q2')">Resposta</Button>
+            </li>
+            <div id="q2" class="resposta">
+                <code>
+                    //Leia o salário de um funcionário e exiba o novo salário deste funcionário com um aumento de 20% <br>
+
+                    let salario = prompt('Digite seu salário')<br>
+                    salario = parseFloat(salario) // converter string para decimal<br>
+
+                    salario *= 1.2 <br>
+
+                    // ou <br>
+                    // salario = salario + (salario * 0.02)<br>
+
+                    //ou <br>
+                    // salario += salario*0.2<br>
+
+                    alert('O novo salário com aumento de 20% é de R$'+ salario)
+                </code>
+            </div>
+            <li>Leia três notas, calcule sua média e a exiba para o usuário
+                <br>
+                <Button onclick="mostrarResposta('q3')">Resposta</Button>
+            </li>
+            <div id="q3" class="resposta">
+                <code>
+                    // leitura, conversão da string para numero e atribuição (estapas de dentro para fora)<br>
+                    let nota1 = Number(prompt('Digite a primeira nota: ')) <br>
+                    let nota2 = Number(prompt('Digite a segunda nota: ')) <br>
+                    let nota3 = Number(prompt('Digite a terceira nota: '))<br>
+                    let media = (nota1 + nota2 + nota3)/ 3<br>
+                    
+                    alert('A média das notas inseridas é ' + media)<br>
+                </code>
+            </div>
+            <li>Leia o lado de um quadrado e calcule sua área. (Lembrando que a área é lado ao quadrado)
+                <br>
+                <Button onclick="mostrarResposta('q4')">Resposta</Button>
+            </li>
+            <div id="q4"class="resposta">
+                <code>
+                    let lado = prompt('Digite o lado do quadrado (apenas numeros)') <br>
+                    lado = Number(lado)<br>
+
+                    area = lado ** 2<br>
+
+                    //ou area = lado * lado<br>
+
+                    alert('a area do quadrado é ' + area) // para o usuário<br>
+                    console.log('a area do quadrado é ' + area) // para os desenvolvedores<br>
+                </code>
+            </div>
+            <li>Leia base e altura de um triângulo e calcule sua área(Área do triângulo: b * h / 2)
+                <br>
+                <Button onclick="mostrarResposta('q5')">Resposta</Button>
+            </li>
+            <div id="q5" class="resposta">
+                <code>
+                    let b = Number(prompt('Digite a base ( apenas numeros)')) //leitura e conversão <br>
+                    let h = Number(prompt('Digite a altura ( apenas numeros)')) //leitura e conversão <br>
+
+                    let area = (b * h) / 2 <br>
+
+                    alert('a area do triângulo é ' + area) // para o usuário<br>
+                    console.log('a area do triângulo é ' + area) // para os desenvolvedores<br>
+                </code>
+            </div>
+            <li>Leia o raio de um círculo e calcule sua área (Área do círculo: pi * raio ao quadrado)
+                <br>
+                <Button onclick="mostrarResposta('q6')">Resposta</Button>
+            </li>
+            <div id="q6" class="resposta">
+                <code>
+                    let raio = Number(prompt('Digite o raio do círculo ( apenas numeros)')) //leitura e conversão <br>
+
+                    let pi = 3.14 <br>
+                    // OU <br>
+                    //let pi = Math.PI <br>
+                    //Math é um objeto embutido que tem propriedades e métodos para constantes e funções matemáticas.<br>
+
+                    let area =  pi * (raio **2)<br>
+
+                    altert(area)<br>
+                </code>
+            </div>
+        </ol>
+
+        <a href="https://drive.google.com/drive/u/0/folders/11LV6xgGGC5eRgDkiwEFw3aA-3UqVLFxT" target="_blank">Click aqui para os arquivos do gabarito</a>
+        <script >
+            function mostrarResposta(id){
+                let divResposta = document.querySelector(`#${id}`)
+                divResposta.style.display= 'block'
+            }
+        </script>
+
+    
+    </main>
+
+    <script></script> 
+    
+    
+    
+</body>
+</html>
