@@ -4,88 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritos Lógica de Programação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-
-        body{
-            display: flex;
-            align-items: center; 
-            justify-content: center;
-            min-height: 100vh; 
-            margin: 0;
-        }
-        main{
-            
-            width: 700px;
-            background-color: rgb(93, 93, 93);
-            border-radius: 10px;
-            border: 2px solid darkslategray;
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        
-        }
-
-        h1{
-            text-align: center;
-            color: white;
-        }
-
-        ol li{
-            color: white;
-            font-size: 20px;
-            margin: 20px;
-        }
-
-        a{
-            padding: 20px;
-            background-color: white;
-            color: black;
-            text-decoration: none;
-            font-weight: bolder;
-            border-radius: 10px;
-        }
-
-        button{
-            border-radius: 10px;
-            padding: 10px;
-            margin: 5px;
-            width: 100%;
-            border: none;
-        }
-
-        a:hover, button:hover{
-            background-color: black;
-            color: white;
-        }
-
-        .resposta{
-            display: none;
+        .resposta {
             background-color: black;
             color: aqua;
-            padding:15px ;
+            padding: 15px;
         }
     </style>
 </head>
 <body>
 
-    <main>
-        <h1>Exercícios Aula 01 - Lógica de Programação</h1>
+    <header>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Aula 01</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aula02.html">Aula 02</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aula03.html">Aula 03</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aula04.html" tabindex="-1" >Aula 04</a>
+            </li>
+          </ul>
+    </header>
 
-        <ol>
-            <li>
-                Leia dois números e exiba com um alert a soma dos dois.
-                <br> 
-                <Button onclick="mostrarResposta('q1')">Resposta</Button>
+    <main class="container my-5">
+        <h1 class="text-center mb-4">Exercícios Aula 01 - Lógica de Programação</h1>
+
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item">Leia dois números e exiba com um alert a soma dos dois.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q1')">Resposta</button>
             </li> 
-            <div id="q1" class="resposta">
+            <div id="q1" class="resposta d-none">
                 <code>
                     let num1 = prompt("Digite o primeiro numero") <br>
                     let num2 = prompt("Digite o segundo numero") <br>
@@ -98,12 +53,11 @@
                     alert('A soma dos dois numeros é ' + soma) <br>
                 </code>
             </div>
-            <li>
-                Leia o salário de um funcionário e exiba o novo salário deste funcionário com um aumento de 20%
+            <li class="list-group-item">Leia o salário de um funcionário e exiba o novo salário deste funcionário com um aumento de 20%
                 <br>
-                <Button onclick="mostrarResposta('q2')">Resposta</Button>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q2')">Resposta</button>
             </li>
-            <div id="q2" class="resposta">
+            <div id="q2" class="resposta d-none">
                 <code>
                     //Leia o salário de um funcionário e exiba o novo salário deste funcionário com um aumento de 20% <br>
 
@@ -121,11 +75,11 @@
                     alert('O novo salário com aumento de 20% é de R$'+ salario)
                 </code>
             </div>
-            <li>Leia três notas, calcule sua média e a exiba para o usuário
+            <li class="list-group-item">Leia três notas, calcule sua média e a exiba para o usuário
                 <br>
-                <Button onclick="mostrarResposta('q3')">Resposta</Button>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q3')">Resposta</button>
             </li>
-            <div id="q3" class="resposta">
+            <div id="q3" class="resposta d-none">
                 <code>
                     // leitura, conversão da string para numero e atribuição (estapas de dentro para fora)<br>
                     let nota1 = Number(prompt('Digite a primeira nota: ')) <br>
@@ -136,11 +90,11 @@
                     alert('A média das notas inseridas é ' + media)<br>
                 </code>
             </div>
-            <li>Leia o lado de um quadrado e calcule sua área. (Lembrando que a área é lado ao quadrado)
+            <li class="list-group-item">Leia o lado de um quadrado e calcule sua área. (Lembrando que a área é lado ao quadrado)
                 <br>
-                <Button onclick="mostrarResposta('q4')">Resposta</Button>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q4')">Resposta</button>
             </li>
-            <div id="q4"class="resposta">
+            <div id="q4"class="resposta d-none">
                 <code>
                     let lado = prompt('Digite o lado do quadrado (apenas numeros)') <br>
                     lado = Number(lado)<br>
@@ -153,11 +107,11 @@
                     console.log('a area do quadrado é ' + area) // para os desenvolvedores<br>
                 </code>
             </div>
-            <li>Leia base e altura de um triângulo e calcule sua área(Área do triângulo: b * h / 2)
+            <li class="list-group-item">Leia base e altura de um triângulo e calcule sua área(Área do triângulo: b * h / 2)
                 <br>
-                <Button onclick="mostrarResposta('q5')">Resposta</Button>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q5')">Resposta</button>
             </li>
-            <div id="q5" class="resposta">
+            <div id="q5" class="resposta d-none">
                 <code>
                     let b = Number(prompt('Digite a base ( apenas numeros)')) //leitura e conversão <br>
                     let h = Number(prompt('Digite a altura ( apenas numeros)')) //leitura e conversão <br>
@@ -168,11 +122,10 @@
                     console.log('a area do triângulo é ' + area) // para os desenvolvedores<br>
                 </code>
             </div>
-            <li>Leia o raio de um círculo e calcule sua área (Área do círculo: pi * raio ao quadrado)
-                <br>
-                <Button onclick="mostrarResposta('q6')">Resposta</Button>
+            <li class="list-group-item">Leia o raio de um círculo e calcule sua área (Área do círculo: pi * raio ao quadrado)
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q6')">Resposta</button>
             </li>
-            <div id="q6" class="resposta">
+            <div id="q6" class="resposta d-none">
                 <code>
                     let raio = Number(prompt('Digite o raio do círculo ( apenas numeros)')) //leitura e conversão <br>
 
@@ -188,17 +141,15 @@
             </div>
         </ol>
 
-        <a href="https://drive.google.com/drive/u/0/folders/11LV6xgGGC5eRgDkiwEFw3aA-3UqVLFxT" target="_blank">Click aqui para os arquivos do gabarito</a>
-       
-
-    
+        <a href="https://drive.google.com/drive/u/0/folders/11LV6xgGGC5eRgDkiwEFw3aA-3UqVLFxT" class="btn btn-secondary mt-3 " target="_blank">Clique aqui para os arquivos do gabarito</a>
     </main>
 
-    <script >
-            function mostrarResposta(id){
-                let divResposta = document.querySelector(`#${id}`)
-                divResposta.style.display= 'block'
-            }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarResposta(id) {
+            let divResposta = document.querySelector(`#${id}`);
+            divResposta.classList.remove('d-none');
+        }
     </script>
 </body>
 </html>
