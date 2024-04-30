@@ -34,6 +34,70 @@
 
     <main  class="container my-5">
         <h1 class="text-center mb-4">Exercícios Aula 02 - Lógica de Programação</h1>
+
+        <ul class="list-group list-group-numbered">
+            <li class="list-group-item">Leia dois números e informe o maior deles.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q1')">Resposta</button>
+            </li> 
+            <div id="q1" class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+
+            <li class="list-group-item">Escreva um algoritmo que leia três valores. A, B, C. E informe se a soma de A + B é maior que C.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q2')">Resposta</button>
+            </li>
+            <div id="q2" class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+
+            <li class="list-group-item">Faça um algoritmo que leia um número e informe se ele é par ou ímpar.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q3')">Resposta</button>
+            </li>
+            <div id="q3" class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+
+            <li class="list-group-item">Faça um algoritmo que leia dois valores inteiros A e B. Se os valores forem iguais deverá se somar os dois, caso contrário, multiplique A por B.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q4')">Resposta</button>
+            </li>
+            <div id="q4"class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+
+            <li class="list-group-item">Faça um algoritmo que leia uma variável e some 5 caso seja par ou some 8 caso seja ímpar, e imprima o resultado desta operação.
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q5')">Resposta</button>
+            </li>
+            <div id="q5" class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+
+            <li class="list-group-item">O IMC – Índice de Massa Corporal é um critério da Organização Mundial de Saúde para dar uma indicação sobre a condição de peso de uma pessoa adulta. A fórmula é IMC = peso / (altura)². Elabore um algoritmo que leia o peso e a altura de um adulto e mostre sua condição de acordo com a tabela abaixo.
+                <ul class="list-group mt-3">
+                    <li class="list-group-item">Abaixo de 18,5: Abaixo do peso</li>
+                    <li class="list-group-item">Entre 18,5 e 25: Peso normal</li>
+                    <li class="list-group-item">Entre 25 e 30: Acima do peso</li>
+                    <li class="list-group-item">Acima de 30: Obeso</li>
+                </ul>
+                <br>
+                <button class="btn btn-dark ms-2" onclick="mostrarResposta('q6')">Resposta</button>
+            </li>
+            <div id="q6" class="resposta d-none">
+                <code>Em breve </code>
+            </div>
+        </ul>
     </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarResposta(id) {
+            let divResposta = document.querySelector(`#${id}`);
+            divResposta.classList.remove('d-none');
+        }
+    </script>
 </body>
 </html>
