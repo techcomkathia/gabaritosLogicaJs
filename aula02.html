@@ -41,7 +41,23 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q1')">Resposta</button>
             </li> 
             <div id="q1" class="resposta d-none">
-                <code>Em breve </code>
+                <pre>
+                   <code>
+                    let num1 = Number(prompt('Digite o primeiro número: '))
+                    let num2 = Number(prompt('Digite o segundo número: '))
+                    
+                    if (num1 > num2) {
+                        console.log(' O primeiro número é maior que o segundo')    
+                    }
+                    else if(num1 < num2){
+                        console.log(' O primeiro número é menor que o segundo')    
+                    }
+                    else {
+                        console.log(' O primeiro número é igual que o segundo')   
+                    }
+                </code> 
+                </pre>
+                
             </div>
 
             <li class="list-group-item">Escreva um algoritmo que leia três valores. A, B, C. E informe se a soma de A + B é maior que C.
@@ -49,7 +65,21 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q2')">Resposta</button>
             </li>
             <div id="q2" class="resposta d-none">
-                <code>Em breve </code>
+            <pre>
+            <code>
+                let A = Number(prompt('Digite o valor para A'))
+                let B = Number(prompt('Digite o valor para B'))
+                let C = Number(prompt('Digite o valor para C'))
+
+
+                if( (A+B) > C){
+                    console.log(`A soma de A (${A}) e de B (${B} É MAIOR que C(${C}))`)
+                }
+                else{
+                    console.log(`A soma de A (${A}) e de B (${B} NÃO É MAIOR que C(${C}))`)
+                }
+            </code>
+            </pre>
             </div>
 
             <li class="list-group-item">Faça um algoritmo que leia um número e informe se ele é par ou ímpar.
@@ -57,7 +87,15 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q3')">Resposta</button>
             </li>
             <div id="q3" class="resposta d-none">
-                <code>Em breve </code>
+                <pre><code>
+                    let num = Number(prompt('Digite um número'))
+                    if( num %2 == 0){
+                        alert('O número é par')
+                    }
+                    else{
+                        alert('O número é ímpar')
+                    }
+                </code></pre>
             </div>
 
             <li class="list-group-item">Faça um algoritmo que leia dois valores inteiros A e B. Se os valores forem iguais deverá se somar os dois, caso contrário, multiplique A por B.
@@ -65,7 +103,20 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q4')">Resposta</button>
             </li>
             <div id="q4"class="resposta d-none">
-                <code>Em breve </code>
+                <pre><code>
+                    
+                let A = Number(prompt('Digite o valor para A'))
+                let B = Number(prompt('Digite o valor para B'))
+
+
+                if( A == B ){
+                    console.log(A + B)
+                }
+                else{
+                    console.log( A * B)
+                }
+
+                </code></pre>
             </div>
 
             <li class="list-group-item">Faça um algoritmo que leia uma variável e some 5 caso seja par ou some 8 caso seja ímpar, e imprima o resultado desta operação.
@@ -73,7 +124,18 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q5')">Resposta</button>
             </li>
             <div id="q5" class="resposta d-none">
-                <code>Em breve </code>
+                <pre><code>
+                    let num = Number(prompt('Digite um número'))
+
+                    if( num % 2 == 0){
+                        num += 5
+                    }
+                    else{
+                        num += 8
+                    }
+
+                    alert(num)
+                </code></pre>
             </div>
 
             <li class="list-group-item">O IMC – Índice de Massa Corporal é um critério da Organização Mundial de Saúde para dar uma indicação sobre a condição de peso de uma pessoa adulta. A fórmula é IMC = peso / (altura)². Elabore um algoritmo que leia o peso e a altura de um adulto e mostre sua condição de acordo com a tabela abaixo.
@@ -87,7 +149,30 @@
                 <button class="btn btn-dark ms-2" onclick="mostrarResposta('q6')">Resposta</button>
             </li>
             <div id="q6" class="resposta d-none">
-                <code>Em breve </code>
+                <pre>
+                    <code>
+                        let peso = Number(prompt( 'Digite seu peso em kg: ')) 
+                        let altura = Number(prompt( 'Digite sua altura em metros: ')) 
+
+                        // Calcular o IMC
+                        let imc = peso / (altura * altura) 
+
+                        // Determinar a condição com base no IMC calculado
+                        let condicao = '' 
+                        if (imc < 18.5) {
+                            condicao =  'Abaixo do peso ' 
+                        } else if (imc >= 18.5 && imc < 25) {
+                            condicao =  'Peso normal ' 
+                        } else if (imc >= 25 && imc < 30) {
+                            condicao =  'Acima do peso ' 
+                        } else {
+                            condicao =  'Obeso ' 
+                        }
+
+                        // Exibir a condição do IMC
+                        alert(`Seu IMC é ${imc} e você está ${condicao}`) 
+                    </code>
+                </pre>
             </div>
         </ul>
     </main>
