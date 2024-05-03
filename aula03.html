@@ -34,6 +34,209 @@
 
     <main  class="container my-5">
         <h1 class="text-center mb-4">Exercícios Aula 03- Lógica de Programação</h1>
+
+        <ul class="list-group list-group-numbered">
+          <li class="list-group-item"> Leia o preço de um produto e a cor da sua etiqueta. De acordo com a cor da etiqueta aplique um desconto sobre o produto. 
+            Verde - 10% | Amarelo - 20% | Azul - 30 % | Vermelho 40%    
+              <br>
+              <button class="btn btn-dark ms-2" onclick="mostrarResposta('q1')">Resposta</button>
+          </li> 
+          <div id="q1" class="resposta d-none ">
+            <pre>
+              <code>
+              let desconto = 0
+              let cor = prompt('Digite a cor da etiqueta do produto: \n Verde \n Amarelo \n Azul \n Vermelho')
+              let valor = Number(prompt('Digite o valor do produto'))
+              let novoPreco = 0
+              
+              switch (corEtiqueta) {
+                  case 'Verde':
+                      desconto = 0.1; // 10%
+                      break;
+                  case 'Amarelo':
+                      desconto = 0.2; // 20%
+                      break
+                  case 'Azul':
+                      desconto = 0.3; // 30%
+                      break
+                  case 'Vermelho':
+                      desconto = 0.4; // 40%
+                      break
+                  default:
+                      console.log('Cor de etiqueta inválida');
+                      desconto= 0 // Retorna o preço sem desconto se a cor da etiqueta for inválida
+              }
+              
+              novoPreco = valor * (1 - desconto)
+              console.log(`O valor do produto com a etiqueta ${cor} teve o valor de R$ ${valor} ajustado para ${novoPreco} `) 
+              </code>
+            </pre>             
+          </div>
+
+          <li class="list-group-item"> Escreva um loop while que exiba os números de 0 a 10 no console.
+              <br>
+              <button class="btn btn-dark ms-2" onclick="mostrarResposta('q2')">Resposta</button>
+          </li> 
+          <div id="q2" class="resposta d-none ">
+            <pre>
+              <code>
+                let num = 0
+                let limite = 10
+                
+                while (num<=limite){
+                    console.log(num)
+                    num+=1 //atualização da condição
+                }
+              </code>
+            </pre>              
+          </div>
+
+          <li class="list-group-item"> Escreva um loop while que exiba os números de 0 ao número passado pelo usuário (utilize prompt)
+            <br>
+            <button class="btn btn-dark ms-2" onclick="mostrarResposta('q3')">Resposta</button>
+          </li> 
+          <div id="q3" class="resposta d-none ">
+            <pre>
+              <code>
+                let num = 0
+                let limite = Number(prompt('Digite o número limite da contagem'))
+
+                while (num<=limite){
+                    console.log(num)
+                    num+=1 //atualização da condição
+                }
+              </code>
+            </pre>              
+          </div>
+
+          <li class="list-group-item"> Escreva um loop while que exiba todos os números pares de 0 a 10 no console.
+            <br>
+            <button class="btn btn-dark ms-2" onclick="mostrarResposta('q4')">Resposta</button>
+        </li> 
+        <div id="q4" class="resposta d-none ">
+          <pre>
+            <code>
+              let num = 0
+
+              while(num<=10){
+                  console.log(num)
+                  num+=2 // incrementando de dois em dois para garantir apenas os pares
+              }
+
+              // ou 
+
+              num = 0 // atualizando o valor
+              
+              while(num<=10){
+                if (num%2==0){
+                  console.log(num)
+                  // imprimi o número apenas se o resto da divisão por dois for 0 (par)
+                }                
+                num+=1 // incrementando de um em um normalmente
+              }
+
+            </code>
+          </pre>              
+        </div>
+
+        <li class="list-group-item">  Escreva um algoritmo que exiba todos os números pares de 0 ao número passado pelo usuário (utilize prompt).
+          <br>
+          <button class="btn btn-dark ms-2" onclick="mostrarResposta('q6')">Resposta</button>
+        </li> 
+        <div id="q6" class="resposta d-none ">
+          <pre>
+            <code>
+              let num = 0
+              let limite = Number(prompt('Digite o número final para a contagem'))
+
+              while(num<=limite){
+                  console.log(num)
+                  num+=2 // incrementando de dois em dois para garantir apenas os pares
+              }
+            </code>
+          </pre>              
+        </div>
+
+        <li class="list-group-item">  Escreva um loop while que exiba todos os números pares de 0 a 10 no console, por fim mostre a quantidade de números pares e a soma de todos eles.
+          <br>
+          <button class="btn btn-dark ms-2" onclick="mostrarResposta('q5')">Resposta</button>
+        </li> 
+        <div id="q5" class="resposta d-none ">
+          <pre>
+            <code>
+              let contator = 0
+              let soma = 0
+              let num = 0
+                            
+              while(num<=10){
+                if (num%2==0){
+                  console.log(num)
+                  contator+=1
+                  soma+= num
+                }                
+                num+=1 // incrementando de um em um normalmente
+              }
+
+              console.log(`No intevalo dos números 0 a 10 temos ${contator} números pares e a soma destes números é ${soma} `)
+            </code>
+          </pre>              
+        </div>
+
+        <li class="list-group-item"> Para a questão 1 resolva o problema de inserção de uma cor de etiqueta que não existe na loja. Garanta que o usuário só irá digitar Verde, Amarelo, Azul ou Vermelho.
+           Enquanto o usuário não digitar um valor válido para etiqueta, informe que ele digitou um valor inválido e peça novamente a cor da etiqueta. 
+            <br>
+            <button class="btn btn-dark ms-2" onclick="mostrarResposta('q7')">Resposta</button>
+        </li> 
+        <div id="q7" class="resposta d-none ">
+          <pre>
+            <code>
+            let desconto = 0
+            let cor = prompt('Digite a cor da etiqueta do produto: \n Verde - 10% \n Amarelo - 20% \n Azul - 30 % \n Vermelho 40% ')
+            let valor = Number(prompt('Digite o valor do produto'))
+            let novoPreco = 0
+
+            //validação da cor da etiqueta
+
+            while (cor )
+            
+            switch (corEtiqueta) {
+                case 'Verde':
+                    desconto = 0.1; // 10%
+                    break;
+                case 'Amarelo':
+                    desconto = 0.2; // 20%
+                    break
+                case 'Azul':
+                    desconto = 0.3; // 30%
+                    break
+                case 'Vermelho':
+                    desconto = 0.4; // 40%
+                    break
+                default:
+                    console.log('Cor de etiqueta inválida');
+                    desconto= 0 // Retorna o preço sem desconto se a cor da etiqueta for inválida
+            }
+            
+            novoPreco = valor * (1 - desconto)
+            console.log(`O valor do produto com a etiqueta ${cor} teve o valor de R$ ${valor} ajustado para ${novoPreco} `) 
+            </code>
+          </pre>             
+        </div>
+      </ul>
+
+      <a href="https://drive.google.com/drive/u/0/folders/1CWb8YxkA-oFq1NY9Yn3d3Ju5a3lw_j8a" class="btn btn-secondary mt-3 " target="_blank">Clique aqui para os arquivos do gabarito</a>
+      
+
+          
+       
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarResposta(id) {
+            let divResposta = document.querySelector(`#${id}`);
+            divResposta.classList.remove('d-none');
+        }
+    </script>
 </body>
 </html>
