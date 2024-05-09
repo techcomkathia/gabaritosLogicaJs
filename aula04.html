@@ -92,6 +92,40 @@
           </pre> 
         </div>
 
+        <li class="list-group-item">
+          Uma loja deseja cadastrar 5 clientes e verificar se o faturamento da loja foi superior a loja B (faturamento = 54000).  Se o faturamento atingir esse valor mostre na tela uma mensagem contendo em quanto foi superado o faturamento.
+          <br>
+          <button class="btn btn-dark ms-2" onclick="mostrarResposta('q3')">Resposta</button>
+        </li> 
+        <div id="q3" class="resposta d-none">
+          <pre>
+            <code>
+              let faturamentoLojaB= 54000
+              let faturamentoLojaA = 0
+              let qtdClientes = 5
+              
+              for(let i=1; i<=qtdClientes; i++){
+                  let compraCliente = Number(prompt(`Digite o valor da compra do cliente nº ${i}`))
+                  faturamentoLojaA+= compraCliente
+              }
+              
+              if(faturamentoLojaA > faturamentoLojaB){
+                  let diferencaFaturamento=  parseFloat(faturamentoLojaA- faturamentoLojaB)
+              
+                  alert(`O faturamento da loja A foi maior que o faturamento da loja B em R$ ${diferencaFaturamento}`)
+              }
+              
+              else if(faturamentoLojaA < faturamentoLojaB){
+                  alert(`O faturamento da loja A não foi maior que o faturamento da loja B`)
+              }
+              
+              else{
+                  alert(`O faturamento da loja A igual faturamento da loja B`)
+              }
+            </code>
+          </pre> 
+        </div>
+
       </ol>
 
       <a href="https://drive.google.com/drive/u/0/folders/1GW7dlheZ7YUThzt3QukSNl_fk-RfVhej" class="btn btn-secondary mt-3 " target="_blank">Clique aqui para os arquivos do gabarito</a>
