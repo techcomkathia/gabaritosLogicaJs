@@ -1,0 +1,146 @@
+window.bancoAulas = window.bancoAulas || [];
+window.bancoAulas.push({
+  id: "aula03",
+  numero: "03",
+  titulo: "Repetição com while",
+  resumo: "Explore laços while, contadores, acumuladores, validação de dados e menus repetidos.",
+  questoes: [
+    { nivel: "facil", enunciado: "Use while para exibir os números de 1 a 10.", resposta: `let numero = 1;
+while (numero <= 10) {
+  console.log(numero);
+  numero++;
+}` },
+    { nivel: "facil", enunciado: "Leia um limite e some todos os números de 1 até esse limite.", resposta: `const limite = Number(prompt("Limite:"));
+let numero = 1;
+let soma = 0;
+while (numero <= limite) {
+  soma += numero;
+  numero++;
+}
+alert("Soma: " + soma);` },
+    { nivel: "facil", enunciado: "Leia um limite e exiba todos os números pares de 0 até ele.", resposta: `const limite = Number(prompt("Limite:"));
+let numero = 0;
+while (numero <= limite) {
+  console.log(numero);
+  numero += 2;
+}` },
+    { nivel: "facil", enunciado: "Leia números até que o usuário digite 0 e conte quantos números diferentes de zero foram informados.", resposta: `let numero = Number(prompt("Número (0 encerra):"));
+let quantidade = 0;
+while (numero !== 0) {
+  quantidade++;
+  numero = Number(prompt("Número (0 encerra):"));
+}
+alert("Quantidade: " + quantidade);` },
+    { nivel: "facil", enunciado: "Peça uma senha e repita a pergunta enquanto ela for diferente de 1234.", resposta: `let senha = prompt("Digite a senha:");
+while (senha !== "1234") {
+  senha = prompt("Senha incorreta. Tente novamente:");
+}
+alert("Acesso permitido");` },
+    { nivel: "facil", enunciado: "Leia um número e exiba sua tabuada de 1 a 5 usando while.", resposta: `const numero = Number(prompt("Número:"));
+let multiplicador = 1;
+while (multiplicador <= 5) {
+  console.log(numero + " x " + multiplicador + " = " + numero * multiplicador);
+  multiplicador++;
+}` },
+    { nivel: "intermediario", enunciado: "Leia um número inteiro não negativo e calcule seu fatorial com while.", resposta: `const numero = Number(prompt("Número não negativo:"));
+let atual = 1;
+let fatorial = 1;
+while (atual <= numero) {
+  fatorial *= atual;
+  atual++;
+}
+alert("Fatorial: " + fatorial);` },
+    { nivel: "intermediario", enunciado: "Leia um limite e some os múltiplos de 3 entre 1 e esse limite.", resposta: `const limite = Number(prompt("Limite:"));
+let numero = 3;
+let soma = 0;
+while (numero <= limite) {
+  soma += numero;
+  numero += 3;
+}
+alert("Soma dos múltiplos: " + soma);` },
+    { nivel: "intermediario", enunciado: "Leia notas até receber -1 e calcule a média das notas válidas.", resposta: `let nota = Number(prompt("Nota (-1 encerra):"));
+let soma = 0;
+let quantidade = 0;
+while (nota !== -1) {
+  soma += nota;
+  quantidade++;
+  nota = Number(prompt("Nota (-1 encerra):"));
+}
+if (quantidade > 0) alert("Média: " + (soma / quantidade).toFixed(2));
+else alert("Nenhuma nota informada");` },
+    { nivel: "intermediario", enunciado: "Peça uma nota até que o valor digitado esteja entre 0 e 10, inclusive.", resposta: `let nota = Number(prompt("Nota entre 0 e 10:"));
+while (nota < 0 || nota > 10) {
+  nota = Number(prompt("Inválida. Digite uma nota entre 0 e 10:"));
+}
+alert("Nota registrada: " + nota);` },
+    { nivel: "intermediario", enunciado: "Crie um menu que se repita até escolher 0: 1 exibe 'Olá', 2 exibe a data atual.", resposta: `let opcao = -1;
+while (opcao !== 0) {
+  opcao = Number(prompt("1 - Olá | 2 - Data | 0 - Sair"));
+  switch (opcao) {
+    case 1: alert("Olá!"); break;
+    case 2: alert(new Date().toLocaleDateString()); break;
+    case 0: alert("Até mais!"); break;
+    default: alert("Opção inválida");
+  }
+}` },
+    { nivel: "intermediario", enunciado: "Leia uma palavra e conte quantas vogais ela possui usando while.", resposta: `const palavra = prompt("Palavra:").toLowerCase();
+const vogais = "aeiouáéíóúãõâêô";
+let indice = 0;
+let quantidade = 0;
+while (indice < palavra.length) {
+  if (vogais.includes(palavra[indice])) quantidade++;
+  indice++;
+}
+alert("Vogais: " + quantidade);` },
+    { nivel: "avancado", enunciado: "Leia um inteiro maior que 1 e determine se ele é primo usando while.", resposta: `const numero = Number(prompt("Inteiro maior que 1:"));
+let divisor = 2;
+let primo = numero > 1;
+while (divisor <= Math.sqrt(numero) && primo) {
+  if (numero % divisor === 0) primo = false;
+  divisor++;
+}
+alert(primo ? "Primo" : "Não primo");` },
+    { nivel: "avancado", enunciado: "Leia dois inteiros positivos e calcule o máximo divisor comum pelo algoritmo de Euclides.", resposta: `let a = Number(prompt("Primeiro inteiro positivo:"));
+let b = Number(prompt("Segundo inteiro positivo:"));
+while (b !== 0) {
+  const resto = a % b;
+  a = b;
+  b = resto;
+}
+alert("MDC: " + a);` },
+    { nivel: "avancado", enunciado: "Gere um número aleatório de 1 a 20 e peça tentativas até acertar, informando se cada palpite é maior ou menor.", resposta: `const secreto = Math.floor(Math.random() * 20) + 1;
+let palpite = Number(prompt("Adivinhe (1 a 20):"));
+while (palpite !== secreto) {
+  if (palpite < secreto) alert("O número é maior");
+  else alert("O número é menor");
+  palpite = Number(prompt("Tente novamente:"));
+}
+alert("Acertou!");` },
+    { nivel: "avancado", enunciado: "Leia um número entre 1 e 100, repetindo a pergunta enquanto estiver fora do intervalo.", resposta: `let numero = Number(prompt("Digite um número de 1 a 100:"));
+while (!Number.isInteger(numero) || numero < 1 || numero > 100) {
+  numero = Number(prompt("Inválido. Digite um inteiro de 1 a 100:"));
+}
+alert("Número aceito: " + numero);` },
+    { nivel: "avancado", enunciado: "Crie um menu de caixa: 1 deposita, 2 consulta saldo, 0 encerra. Inicie o saldo em zero.", resposta: `let saldo = 0;
+let opcao = -1;
+while (opcao !== 0) {
+  opcao = Number(prompt("1 - Depositar | 2 - Saldo | 0 - Sair"));
+  if (opcao === 1) {
+    const valor = Number(prompt("Valor do depósito:"));
+    if (valor > 0) saldo += valor;
+    else alert("Valor inválido");
+  } else if (opcao === 2) alert("Saldo: R$ " + saldo.toFixed(2));
+  else if (opcao !== 0) alert("Opção inválida");
+}` },
+    { nivel: "avancado", enunciado: "Leia inteiros até -1 e informe o maior e o menor valor digitado, sem considerar o sentinela.", resposta: `let numero = Number(prompt("Inteiro (-1 encerra):"));
+let maior = null;
+let menor = null;
+while (numero !== -1) {
+  if (maior === null || numero > maior) maior = numero;
+  if (menor === null || numero < menor) menor = numero;
+  numero = Number(prompt("Inteiro (-1 encerra):"));
+}
+if (maior === null) alert("Nenhum valor informado");
+else alert("Maior: " + maior + " | Menor: " + menor);` }
+  ]
+});
