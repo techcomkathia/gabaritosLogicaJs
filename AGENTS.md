@@ -12,6 +12,7 @@ A interface não usa framework, dependências de build, servidor ou backend. O c
 - `css/app.css`: layout responsivo, componentes e tokens de cor dos temas claro e escuro.
 - `js/app.js`: navegação por hash, sorteio, fixação, persistência, alternância de tema, realce de sintaxe e renderização segura.
 - `js/aulas/aula01.js` a `js/aulas/aula04.js`: metadados e questões. Cada arquivo acrescenta uma aula a `window.bancoAulas`.
+- `README.md`: guia para o aluno, focado em como usar as funcionalidades. Atualize a tabela de aulas e as contagens quando os bancos mudarem.
 - `aula02.html`, `aula03.html`, `aula04.html`: páginas de compatibilidade que redirecionam para a aula correspondente no índice. Não duplicar nelas a aplicação.
 
 ## Bancos de questões
