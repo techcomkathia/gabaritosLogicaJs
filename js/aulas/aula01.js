@@ -17,7 +17,10 @@ alert("Novo preço: R$ " + precoAtualizado.toFixed(2));` },
     { id: "A01-Q04", nivel: "facil", enunciado: "Leia três notas e exiba a média aritmética.", resposta: `const nota1 = Number(prompt("Nota 1:"));
 const nota2 = Number(prompt("Nota 2:"));
 const nota3 = Number(prompt("Nota 3:"));
-alert("Média: " + ((nota1 + nota2 + nota3) / 3).toFixed(2));` },
+// .toFixed() é uma função de arredondamento de casas que limita o número de casas decimais
+alert("Média: " + ((nota1 + nota2 + nota3) / 3).toFixed(2));
+//usada no alert o toFixed() não altera o valor das variáveis
+` },
     { id: "A01-Q05", nivel: "facil", enunciado: "Leia o lado de um quadrado e calcule sua área.", resposta: `const lado = Number(prompt("Lado do quadrado:"));
 const area = lado ** 2;
 alert("Área: " + area);` },
@@ -26,7 +29,10 @@ const altura = Number(prompt("Altura:"));
 const area = (base * altura) / 2;
 alert("Área: " + area);` },
     { id: "A01-Q07", nivel: "intermediario", enunciado: "Leia o raio de um círculo e calcule sua área usando Math.PI.", resposta: `const raio = Number(prompt("Raio:"));
+// Math é uma biblioteca de funções matemáticas predefinidas
+// Math.PI retorna o valor de PI     
 const area = Math.PI * raio ** 2;
+//// .toFixed() é uma função de arredondamento de casas que limita o número de casas decimais
 alert("Área: " + area.toFixed(2));` },
     { id: "A01-Q08", nivel: "intermediario", enunciado: "Converta uma duração total em minutos para horas e minutos restantes.", resposta: `const totalMinutos = Number(prompt("Duração em minutos:"));
 const horas = Math.floor(totalMinutos / 60);
@@ -38,6 +44,7 @@ alert(fahrenheit.toFixed(1) + " °F");` },
     { id: "A01-Q10", nivel: "intermediario", enunciado: "Leia o preço e o percentual de desconto e mostre o valor final.", resposta: `const preco = Number(prompt("Preço:"));
 const percentual = Number(prompt("Desconto (%):"));
 const valorFinal = preco * (1 - percentual / 100);
+// .toFixed() é uma função de arredondamento de casas que limita o número de casas decimais
 alert("Valor final: R$ " + valorFinal.toFixed(2));` },
     { id: "A01-Q11", nivel: "intermediario", enunciado: "Calcule o IMC a partir do peso em kg e da altura em metros.", resposta: `const peso = Number(prompt("Peso em kg:"));
 const altura = Number(prompt("Altura em metros:"));
