@@ -93,8 +93,18 @@ function difficultyKey() {
   return `pratica-js:${activeLesson.id}:dificuldade`;
 }
 
-function questionId(question) {
+function questionPosition(question) {
   return activeLesson.questoes.indexOf(question);
+}
+
+function findSavedQuestion(savedId) {
+  // Seleções antigas guardavam a posição da questão; as novas guardam o ID.
+  if (typeof savedId === "number") return activeLesson.questoes[savedId];
+  return activeLesson.questoes.find((question) => question.id === savedId);
+}
+
+function saveSelection() {
+  localStorage.setItem(selectionKey(), JSON.stringify(visibleQuestions.map((question) => question.id)));
 }
 
 function drawQuestions() {
@@ -107,20 +117,20 @@ function drawQuestions() {
     const savedIds = JSON.parse(localStorage.getItem(selectionKey()) || "null");
     if (Array.isArray(savedIds)) {
       const savedQuestions = savedIds
-        .map((id) => activeLesson.questoes[id])
+        .map(findSavedQuestion)
         .filter((question) => question && (difficulty === "aleatorio" || question.nivel === difficulty));
       if (savedQuestions.length === 6) return savedQuestions;
     }
   }
 
   const selected = shuffle(pool).slice(0, 6);
-  return selected.sort((first, second) => questionId(first) - questionId(second));
+  return selected.sort((first, second) => questionPosition(first) - questionPosition(second));
 }
 
 function savePinnedQuestions() {
   if (pinCheckbox.checked) {
     localStorage.setItem(pinKey(), "true");
-    localStorage.setItem(selectionKey(), JSON.stringify(visibleQuestions.map(questionId)));
+    saveSelection();
   } else {
     localStorage.removeItem(pinKey());
     localStorage.removeItem(selectionKey());
@@ -145,7 +155,7 @@ function renderQuestions() {
   visibleQuestions = drawQuestions();
   if (pinCheckbox.checked) {
     localStorage.setItem(pinKey(), "true");
-    localStorage.setItem(selectionKey(), JSON.stringify(visibleQuestions.map(questionId)));
+    saveSelection();
   }
   questionList.replaceChildren();
   questionCount.textContent = `${visibleQuestions.length} questões`;
@@ -168,11 +178,18 @@ function renderQuestions() {
     const number = document.createElement("span");
     number.className = "question-index";
     number.textContent = `QUESTÃO ${String(index + 1).padStart(2, "0")}`;
+    const questionCode = document.createElement("span");
+    questionCode.className = "question-code";
+    questionCode.title = "Informe este código ao tirar dúvidas sobre a questão";
+    questionCode.textContent = question.id;
+    const heading = document.createElement("div");
+    heading.className = "question-heading";
+    heading.append(number, questionCode);
     const level = document.createElement("span");
     level.className = "level-tag";
     level.dataset.level = question.nivel;
     level.textContent = difficultyNames[question.nivel];
-    topline.append(number, level);
+    topline.append(heading, level);
 
     const prompt = document.createElement("p");
     prompt.className = "question-prompt";
