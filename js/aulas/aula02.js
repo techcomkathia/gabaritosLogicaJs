@@ -86,6 +86,105 @@ if (hora < 0 || hora > 23) alert("Hora inválida");
 else if (hora >= 5 && hora <= 11) alert("Manhã");
 else if (hora <= 17) alert("Tarde");
 else if (hora <= 22) alert("Noite");
-else alert("Madrugada");` }
+else alert("Madrugada");` },
+    { nivel: "facil", enunciado: "Leia um número. Se ele for maior ou igual a zero, mostre sua raiz quadrada com Math.sqrt; se for negativo, mostre \"Número inválido\".", resposta: `const numero = Number(prompt("Número:"));
+if (numero >= 0) alert("Raiz quadrada: " + Math.sqrt(numero).toFixed(2));
+else alert("Número inválido");` },
+    { nivel: "facil", enunciado: "Leia o salário de um trabalhador e o valor da prestação de um empréstimo. Se a prestação for maior que 20% do salário, mostre \"Empréstimo não concedido\"; caso contrário, \"Empréstimo concedido\".", resposta: `const salario = Number(prompt("Salário:"));
+const prestacao = Number(prompt("Valor da prestação:"));
+if (prestacao > salario * 0.2) alert("Empréstimo não concedido");
+else alert("Empréstimo concedido");` },
+    { nivel: "facil", enunciado: "Leia a altura (h) e o sexo de uma pessoa e mostre o peso ideal: homens (72.7 * h) - 58; mulheres (62.1 * h) - 44.7.", resposta: `const altura = Number(prompt("Altura em metros:"));
+const sexo = prompt("Sexo (M ou F):").toUpperCase();
+if (sexo === "M") alert("Peso ideal: " + (72.7 * altura - 58).toFixed(2) + " kg");
+else if (sexo === "F") alert("Peso ideal: " + (62.1 * altura - 44.7).toFixed(2) + " kg");
+else alert("Sexo inválido");` },
+    { nivel: "intermediario", enunciado: "Leia as notas de 3 provas e calcule a média ponderada (pesos 1, 1 e 2). Mostre a média e se o aluno foi aprovado (média igual ou superior a 60) ou reprovado.", resposta: `const prova1 = Number(prompt("Nota da prova 1:"));
+const prova2 = Number(prompt("Nota da prova 2:"));
+const prova3 = Number(prompt("Nota da prova 3:"));
+const media = (prova1 * 1 + prova2 * 1 + prova3 * 2) / 4;
+if (media >= 60) alert("Média: " + media.toFixed(2) + " | Aprovado");
+else alert("Média: " + media.toFixed(2) + " | Reprovado");` },
+    { nivel: "intermediario", enunciado: "Leia três notas de 0 a 10: trabalho de laboratório (peso 2), avaliação semestral (peso 3) e exame final (peso 5). Valide as notas e informe reprovado (média de 0 a 2,9), recuperação (3 a 4,9) ou aprovado.", resposta: `const laboratorio = Number(prompt("Trabalho de laboratório (0 a 10):"));
+const semestral = Number(prompt("Avaliação semestral (0 a 10):"));
+const exame = Number(prompt("Exame final (0 a 10):"));
+const notasValidas = laboratorio >= 0 && laboratorio <= 10
+  && semestral >= 0 && semestral <= 10
+  && exame >= 0 && exame <= 10;
+if (!notasValidas) {
+  alert("As notas devem estar entre 0 e 10");
+} else {
+  const media = (laboratorio * 2 + semestral * 3 + exame * 5) / 10;
+  if (media < 3) alert("Média " + media.toFixed(1) + ": reprovado");
+  else if (media < 5) alert("Média " + media.toFixed(1) + ": recuperação");
+  else alert("Média " + media.toFixed(1) + ": aprovado");
+}` },
+    { nivel: "intermediario", enunciado: "Usando switch, leia um inteiro entre 1 e 7 e mostre o dia da semana correspondente (1 é domingo, 2 é segunda-feira e assim por diante).", resposta: `const dia = Number(prompt("Número de 1 a 7:"));
+switch (dia) {
+  case 1: alert("Domingo"); break;
+  case 2: alert("Segunda-feira"); break;
+  case 3: alert("Terça-feira"); break;
+  case 4: alert("Quarta-feira"); break;
+  case 5: alert("Quinta-feira"); break;
+  case 6: alert("Sexta-feira"); break;
+  case 7: alert("Sábado"); break;
+  default: alert("Número inválido");
+}` },
+    { nivel: "intermediario", enunciado: "Mostre um menu com 4 operações matemáticas básicas. Depois que o usuário escolher uma opção, leia dois valores, realize a operação e mostre o resultado.", resposta: `const opcao = Number(prompt("1 - Somar | 2 - Subtrair | 3 - Multiplicar | 4 - Dividir"));
+if (opcao < 1 || opcao > 4) {
+  alert("Opção inválida");
+} else {
+  const a = Number(prompt("Primeiro valor:"));
+  const b = Number(prompt("Segundo valor:"));
+  if (opcao === 1) alert("Resultado: " + (a + b));
+  else if (opcao === 2) alert("Resultado: " + (a - b));
+  else if (opcao === 3) alert("Resultado: " + (a * b));
+  else if (b === 0) alert("Não é possível dividir por zero");
+  else alert("Resultado: " + (a / b));
+}` },
+    { nivel: "intermediario", enunciado: "Leia um número inteiro e verifique se ele é divisível por 3 ou por 5, mas não pelos dois ao mesmo tempo.", resposta: `const numero = Number(prompt("Número inteiro:"));
+const por3 = numero % 3 === 0;
+const por5 = numero % 5 === 0;
+if ((por3 || por5) && !(por3 && por5)) alert("Divisível por 3 ou por 5, mas não pelos dois");
+else alert("Não atende à condição");` },
+    { nivel: "intermediario", enunciado: "Leia a idade e o tempo de serviço de um trabalhador e informe se ele pode se aposentar: ter pelo menos 65 anos, ou ter trabalhado pelo menos 30 anos, ou ter pelo menos 60 anos e trabalhado pelo menos 25 anos.", resposta: `const idade = Number(prompt("Idade:"));
+const tempo = Number(prompt("Tempo de serviço (anos):"));
+const podeAposentar = idade >= 65 || tempo >= 30 || (idade >= 60 && tempo >= 25);
+alert(podeAposentar ? "Pode se aposentar" : "Ainda não pode se aposentar");` },
+    { nivel: "avancado", enunciado: "Leia três números e mostre-os em ordem crescente.", resposta: `let a = Number(prompt("Número 1:"));
+let b = Number(prompt("Número 2:"));
+let c = Number(prompt("Número 3:"));
+let troca;
+if (a > b) { troca = a; a = b; b = troca; }
+if (a > c) { troca = a; a = c; c = troca; }
+if (b > c) { troca = b; b = c; c = troca; }
+alert("Ordem crescente: " + a + ", " + b + ", " + c);` },
+    { nivel: "avancado", enunciado: "Leia o salário atual e o tempo de serviço (em anos) e mostre o salário reajustado. Reajuste: até R$ 500, 25%; até R$ 1.000, 20%; até R$ 1.500, 15%; até R$ 2.000, 10%; acima disso, sem reajuste. Bônus: abaixo de 1 ano, sem bônus; 1 a 3 anos, R$ 100; 4 a 6 anos, R$ 200; 7 a 10 anos, R$ 300; mais de 10 anos, R$ 500. Se não houver reajuste nem bônus, informe que o funcionário não tem direito a aumento.", resposta: `const salario = Number(prompt("Salário atual:"));
+const tempo = Number(prompt("Tempo de serviço (anos):"));
+let reajuste;
+if (salario <= 500) reajuste = 0.25;
+else if (salario <= 1000) reajuste = 0.20;
+else if (salario <= 1500) reajuste = 0.15;
+else if (salario <= 2000) reajuste = 0.10;
+else reajuste = 0;
+let bonus;
+if (tempo < 1) bonus = 0;
+else if (tempo <= 3) bonus = 100;
+else if (tempo <= 6) bonus = 200;
+else if (tempo <= 10) bonus = 300;
+else bonus = 500;
+if (reajuste === 0 && bonus === 0) alert("Funcionário sem direito a aumento");
+else alert("Salário reajustado: R$ " + (salario * (1 + reajuste) + bonus).toFixed(2));` },
+    { nivel: "intermediario", enunciado: "Calcule o IMC e mostre a classificação: abaixo de 18,5, abaixo do peso; até 24,9, saudável; até 29,9, peso em excesso; até 34,9, obesidade grau 1; até 39,9, obesidade grau 2 (severa); 40 ou mais, obesidade grau 3 (mórbida).", resposta: `const peso = Number(prompt("Peso em kg:"));
+const altura = Number(prompt("Altura em metros:"));
+const imc = peso / altura ** 2;
+let classificacao;
+if (imc < 18.5) classificacao = "Abaixo do peso";
+else if (imc < 25) classificacao = "Saudável";
+else if (imc < 30) classificacao = "Peso em excesso";
+else if (imc < 35) classificacao = "Obesidade grau 1";
+else if (imc < 40) classificacao = "Obesidade grau 2 (severa)";
+else classificacao = "Obesidade grau 3 (mórbida)";
+alert("IMC: " + imc.toFixed(1) + " | " + classificacao);` }
   ]
 });

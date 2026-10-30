@@ -36,7 +36,7 @@ window.bancoAulas.push({
 });
 ```
 
-Convenção atual: 18 questões por aula, seis em cada nível (`facil`, `intermediario`, `avancado`). O valor `aleatorio` é uma opção do seletor, não um nível armazenado na questão. IDs de aula devem ser únicos; questões são referenciadas pela posição no array do banco, portanto preserve a ordem dos itens ao editar bancos existentes.
+Convenção: cada aula começa com 18 questões, seis em cada nível (`facil`, `intermediario`, `avancado`), e pode receber questões extras acrescentadas ao final do array; cada nível deve manter pelo menos seis questões para completar uma rodada. As Aulas 02 a 04 incluem os desafios extras dos PDFs antigos do Google Drive: condicionais na Aula 02; repetição dividida entre a Aula 03 (laços por condição ou sentinela, com `while`) e a Aula 04 (laços contados, com `for`). O valor `aleatorio` é uma opção do seletor, não um nível armazenado na questão. IDs de aula devem ser únicos; questões são referenciadas pela posição no array do banco, portanto preserve a ordem dos itens ao editar bancos existentes.
 
 Para adicionar uma aula, criar `js/aulas/aulaNN.js` seguindo o formato e adicionar seu `<script defer>` em `index.html` antes de `js/app.js`. A navegação é gerada a partir de `window.bancoAulas`, então não criar uma página específica para a nova aula.
 
@@ -72,7 +72,7 @@ node --check js/aulas/aula03.js
 node --check js/aulas/aula04.js
 ```
 
-Validar também que cada aula tenha 18 questões, seis por nível, com enunciado e gabarito não vazios. No navegador, conferir navegação por hash, filtros, distribuição aleatória, fixação após recarregar, abrir/fechar respostas, persistência dos dois temas e largura móvel com um gabarito longo aberto.
+Validar também que cada aula tenha pelo menos seis questões por nível, com enunciado e gabarito não vazios. No navegador, conferir navegação por hash, filtros, distribuição aleatória, fixação após recarregar, abrir/fechar respostas, persistência dos dois temas e largura móvel com um gabarito longo aberto.
 
 ## Limites conhecidos
 

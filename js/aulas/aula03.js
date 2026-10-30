@@ -141,6 +141,58 @@ while (numero !== -1) {
   numero = Number(prompt("Inteiro (-1 encerra):"));
 }
 if (maior === null) alert("Nenhum valor informado");
-else alert("Maior: " + maior + " | Menor: " + menor);` }
+else alert("Maior: " + maior + " | Menor: " + menor);` },
+    { nivel: "facil", enunciado: "Use while para mostrar uma contagem regressiva de 10 até 0 e, ao final, a mensagem \"FIM!\".", resposta: `let contador = 10;
+while (contador >= 0) {
+  console.log(contador);
+  contador--;
+}
+console.log("FIM!");` },
+    { nivel: "facil", enunciado: "Declare uma variável iniciada em 0 e incremente-a de 1000 em 1000, mostrando seu valor até chegar a 100000.", resposta: `let valor = 0;
+while (valor <= 100000) {
+  console.log(valor);
+  valor += 1000;
+}` },
+    { nivel: "intermediario", enunciado: "Leia um inteiro maior que zero e use while para somar seus algarismos (251 resulta em 2 + 5 + 1 = 8). Se o número não for um inteiro maior que zero, mostre \"Número inválido\".", resposta: `const numero = Number(prompt("Inteiro maior que zero:"));
+if (!Number.isInteger(numero) || numero <= 0) {
+  alert("Número inválido");
+} else {
+  let restante = numero;
+  let soma = 0;
+  while (restante > 0) {
+    soma += restante % 10;
+    restante = Math.floor(restante / 10);
+  }
+  alert("Soma dos algarismos: " + soma);
+}` },
+    { nivel: "avancado", enunciado: "Gere um número aleatório de 1 a 1000 e peça palpites até o usuário acertar, informando a cada tentativa se o chute é menor ou maior que o número gerado. Ao final, mostre em quantas tentativas o número foi descoberto.", resposta: `const secreto = Math.floor(Math.random() * 1000) + 1;
+let palpite = Number(prompt("Adivinhe o número (1 a 1000):"));
+let tentativas = 1;
+while (palpite !== secreto) {
+  if (palpite < secreto) alert("Seu chute é menor que o número gerado");
+  else alert("Seu chute é maior que o número gerado");
+  palpite = Number(prompt("Tente novamente:"));
+  tentativas++;
+}
+alert("Acertou em " + tentativas + " tentativas!");` },
+    { nivel: "intermediario", enunciado: "Chico tem 1,50 m e cresce 2 cm por ano; Zé tem 1,10 m e cresce 3 cm por ano. Calcule quantos anos serão necessários para que Zé seja maior que Chico.", resposta: `// Alturas em centímetros evitam erros de arredondamento com decimais.
+let chico = 150;
+let ze = 110;
+let anos = 0;
+while (ze <= chico) {
+  chico += 2;
+  ze += 3;
+  anos++;
+}
+alert("Zé será maior que Chico em " + anos + " anos");` },
+    { nivel: "avancado", enunciado: "Um funcionário foi contratado em 1995 com salário de R$ 2.000. Em 1996 recebeu aumento de 1,5% e, a partir de 1997, cada aumento percentual é o dobro do anterior. Use while para calcular o salário em 2000.", resposta: `let salario = 2000;
+let percentual = 1.5;
+let ano = 1996;
+while (ano <= 2000) {
+  salario += salario * percentual / 100;
+  percentual *= 2;
+  ano++;
+}
+alert("Salário em 2000: R$ " + salario.toFixed(2));` }
   ]
 });
