@@ -13,7 +13,6 @@ A interface não usa framework, dependências de build, servidor ou backend. O c
 - `js/app.js`: navegação por hash, sorteio, fixação, persistência, alternância de tema, realce de sintaxe e renderização segura.
 - `js/aulas/aula01.js` a `js/aulas/aula04.js`: metadados e questões. Cada arquivo acrescenta uma aula a `window.bancoAulas`.
 - `aula02.html`, `aula03.html`, `aula04.html`: páginas de compatibilidade que redirecionam para a aula correspondente no índice. Não duplicar nelas a aplicação.
-- `arquivosGabaritos/`: scripts e páginas legados, preservados mas não consumidos pela interface atual.
 
 ## Bancos de questões
 
@@ -28,6 +27,7 @@ window.bancoAulas.push({
   resumo: "Breve explicação do conteúdo da aula.",
   questoes: [
     {
+      id: "A05-Q01", // código exibido ao aluno: A<numero da aula>-Q<posição>
       nivel: "facil", // facil, intermediario ou avancado
       enunciado: "Descrição do exercício.",
       resposta: `// Gabarito em JavaScript`
@@ -36,7 +36,7 @@ window.bancoAulas.push({
 });
 ```
 
-Convenção: cada aula começa com 18 questões, seis em cada nível (`facil`, `intermediario`, `avancado`), e pode receber questões extras acrescentadas ao final do array; cada nível deve manter pelo menos seis questões para completar uma rodada. As Aulas 02 a 04 incluem os desafios extras dos PDFs antigos do Google Drive: condicionais na Aula 02; repetição dividida entre a Aula 03 (laços por condição ou sentinela, com `while`) e a Aula 04 (laços contados, com `for`). O valor `aleatorio` é uma opção do seletor, não um nível armazenado na questão. IDs de aula devem ser únicos; questões são referenciadas pela posição no array do banco, portanto preserve a ordem dos itens ao editar bancos existentes.
+Convenção: cada aula começa com 18 questões, seis em cada nível (`facil`, `intermediario`, `avancado`), e pode receber questões extras acrescentadas ao final do array; cada nível deve manter pelo menos seis questões para completar uma rodada. As Aulas 02 a 04 incluem os desafios extras dos PDFs antigos do Google Drive: condicionais na Aula 02; repetição dividida entre a Aula 03 (laços por condição ou sentinela, com `while`) e a Aula 04 (laços contados, com `for`). Os exercícios exclusivos da antiga pasta `arquivosGabaritos/` foram migrados com gabaritos corrigidos (A02-Q31 a Q33, A03-Q25 e Q26, A04-Q34 a Q37), e a pasta foi removida; o conteúdo original continua no histórico do git. O valor `aleatorio` é uma opção do seletor, não um nível armazenado na questão. IDs de aula devem ser únicos. Cada questão tem um `id` no formato `A02-Q07`, mostrado no card para o aluno citar ao tirar dúvidas. O ID é permanente: não renumere nem reaproveite códigos. Novas questões vão no fim do array com o próximo número livre; se uma questão for removida, o código dela não volta a ser usado. Preserve a ordem dos itens, porque ela define a ordem de exibição.
 
 Para adicionar uma aula, criar `js/aulas/aulaNN.js` seguindo o formato e adicionar seu `<script defer>` em `index.html` antes de `js/app.js`. A navegação é gerada a partir de `window.bancoAulas`, então não criar uma página específica para a nova aula.
 
@@ -47,7 +47,7 @@ Gabaritos são texto didático que pode usar `prompt`, `alert` e `console.log`. 
 - A aula atual é identificada pelo hash, por exemplo `index.html#aula03`.
 - Cada rodada seleciona até seis questões e as exibe na ordem original do banco. Níveis Fácil, Intermediário e Avançado selecionam do grupo correspondente; Aleatório seleciona do conjunto inteiro.
 - Aleatório não garante uma questão de cada nível. Para exigir uma distribuição balanceada, alterar `drawQuestions()` em `js/app.js` e testar a distribuição.
-- A fixação impede novo sorteio e persiste a seleção no `localStorage`. O array salvo contém índices das questões, não IDs individuais. As chaves são `pratica-js:<aulaId>:<nivel>` para índices, `pratica-js:<aulaId>:<nivel>:fixada` para o estado fixado e `pratica-js:<aulaId>:dificuldade` para a preferência de nível da aula.
+- A fixação impede novo sorteio e persiste a seleção no `localStorage`. O array salvo contém os `id` das questões; arrays antigos com índices numéricos ainda são lidos e regravados com IDs na próxima renderização. As chaves são `pratica-js:<aulaId>:<nivel>` para índices, `pratica-js:<aulaId>:<nivel>:fixada` para o estado fixado e `pratica-js:<aulaId>:dificuldade` para a preferência de nível da aula.
 - As respostas começam ocultas ao renderizar uma rodada. Há controle por questão e controle global para mostrar/ocultar todas.
 - O modo começa escuro se ainda não houver escolha salva. O botão do cabeçalho alterna claro/escuro e grava `pratica-js:tema` no `localStorage`. O script de inicialização em `index.html` também sincroniza `data-theme` e `meta theme-color` antes do CSS.
 - A identidade visual usa roxo e rosa. Em `css/app.css`, `--accent`/`--accent-soft` representam o roxo e `--pink`/`--pink-soft` representam o rosa; evite introduzir novamente cores verdes como cor de marca.
@@ -72,11 +72,10 @@ node --check js/aulas/aula03.js
 node --check js/aulas/aula04.js
 ```
 
-Validar também que cada aula tenha pelo menos seis questões por nível, com enunciado e gabarito não vazios. No navegador, conferir navegação por hash, filtros, distribuição aleatória, fixação após recarregar, abrir/fechar respostas, persistência dos dois temas e largura móvel com um gabarito longo aberto.
+Validar também que cada aula tenha pelo menos seis questões por nível, com `id` único, enunciado e gabarito não vazios. No navegador, conferir navegação por hash, filtros, distribuição aleatória, fixação após recarregar, abrir/fechar respostas, persistência dos dois temas e largura móvel com um gabarito longo aberto.
 
 ## Limites conhecidos
 
 - Conteúdo ativo: Aula 01, dados e cálculos; Aula 02, decisões e condicionais; Aula 03, repetição com `while`; Aula 04, repetição com `for`. Não presumir que todo o módulo de JavaScript já foi cadastrado.
-- Os bancos novos não foram totalmente reconciliados com o material histórico em `arquivosGabaritos/`. Antes de migrar ou remover scripts antigos, comparar gabaritos e preservar conteúdo que ainda seja útil.
 - Soluções podem pressupor entradas válidas. A aplicação não valida respostas dos alunos nem executa gabaritos em sandbox.
 - O tokenizer de sintaxe é propositalmente pequeno e baseado em expressões regulares; não ampliar para uma linguagem completa sem adotar um parser ou biblioteca de highlighting.
