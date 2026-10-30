@@ -17,9 +17,60 @@ const questionList = document.querySelector("#question-list");
 const questionCount = document.querySelector("#question-count");
 const selectionNote = document.querySelector("#selection-note");
 const toggleAllButton = document.querySelector("#toggle-all-answers");
+const themeToggle = document.querySelector("#theme-toggle");
 const lessons = window.bancoAulas;
 let activeLesson;
 let visibleQuestions = [];
+
+function setTheme(theme) {
+  const activeTheme = theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = activeTheme;
+  themeToggle.setAttribute("aria-pressed", String(activeTheme === "dark"));
+  const nextTheme = activeTheme === "dark" ? "claro" : "escuro";
+  themeToggle.setAttribute("aria-label", `Ativar tema ${nextTheme}`);
+  themeToggle.title = `Ativar tema ${nextTheme}`;
+  document.querySelector('meta[name="theme-color"]').content = activeTheme === "dark" ? "#1e1e1e" : "#f8f5fb";
+}
+
+setTheme(document.documentElement.dataset.theme);
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try {
+    localStorage.setItem("pratica-js:tema", nextTheme);
+  } catch {
+    // O tema continua funcionando durante a sessão se o armazenamento estiver indisponível.
+  }
+  setTheme(nextTheme);
+});
+
+const codeTokenPattern = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|`(?:\\[\s\S]|[^`])*`|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|\b(?:const|let|var|if|else|switch|case|default|break|while|for|return|function|new|typeof|instanceof|in|of|try|catch|throw|class|extends|this)\b|\b(?:true|false|null|undefined|NaN|Infinity)\b|\b(?:Math|Number|String|Date|console|prompt|alert|parseInt|parseFloat)\b|\b\d+(?:\.\d+)?\b|\b[A-Za-z_$][\w$]*(?=\s*\()|===?|!==?|=>|\+\+|--|&&|\|\||[%+*/<>&|!-]=?)/g;
+
+function appendHighlightedCode(codeElement, source) {
+  const fragment = document.createDocumentFragment();
+  let lastIndex = 0;
+  let match;
+
+  while ((match = codeTokenPattern.exec(source)) !== null) {
+    if (match.index > lastIndex) fragment.append(document.createTextNode(source.slice(lastIndex, match.index)));
+    const token = match[0];
+    const span = document.createElement("span");
+    span.textContent = token;
+    if (/^(\/\/|\/\*)/.test(token)) span.className = "token-comment";
+    else if (/^[`'"]/.test(token)) span.className = "token-string";
+    else if (/^(const|let|var|if|else|switch|case|default|break|while|for|return|function|new|typeof|instanceof|in|of|try|catch|throw|class|extends|this)$/.test(token)) span.className = "token-keyword";
+    else if (/^(true|false|null|undefined|NaN|Infinity)$/.test(token)) span.className = "token-literal";
+    else if (/^\d/.test(token)) span.className = "token-number";
+    else if (/^(Math|Number|String|Date|console|prompt|alert|parseInt|parseFloat)$/.test(token)) span.className = "token-builtin";
+    else if (/^(===?|!==?|=>|\+\+|--|&&|\|\||[%+*/<>&|!-]=?)$/.test(token)) span.className = "token-operator";
+    else span.className = "token-function";
+    fragment.append(span);
+    lastIndex = codeTokenPattern.lastIndex;
+  }
+
+  if (lastIndex < source.length) fragment.append(document.createTextNode(source.slice(lastIndex)));
+  codeTokenPattern.lastIndex = 0;
+  codeElement.replaceChildren(fragment);
+}
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -132,7 +183,7 @@ function renderQuestions() {
     answer.hidden = true;
     const code = document.createElement("pre");
     const codeText = document.createElement("code");
-    codeText.textContent = question.resposta;
+    appendHighlightedCode(codeText, question.resposta);
     code.append(codeText);
     answer.append(code);
 

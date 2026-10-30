@@ -1,21 +1,23 @@
 # Contexto do projeto
 
-## Objetivo
+## Objetivo e estado
 
-Aplicação estática para praticar lógica de programação com JavaScript. O índice apresenta aulas, uma breve explicação do tema e seis questões por rodada, com gabaritos que o aluno pode revelar ou ocultar. O estado da interface e o conteúdo não dependem de framework ou etapa de build.
+Aplicação estática para praticar lógica de programação com JavaScript. O índice mostra uma aula por vez, uma breve explicação do tema e seis questões por rodada. O aluno pode escolher a dificuldade, sortear uma rodada, fixar a seleção e revelar ou ocultar os gabaritos.
 
-## Estrutura atual
+A interface não usa framework, dependências de build, servidor ou backend. O conteúdo é carregado de bancos JS locais. O módulo está parcialmente cadastrado: há quatro aulas ativas, não o curso inteiro.
 
-- `index.html`: casca da aplicação. Carrega os bancos de aula com `defer` antes de `js/app.js`; essa ordem é necessária porque o controlador usa `window.bancoAulas` ao iniciar.
-- `css/app.css`: tema, componentes e regras responsivas.
-- `js/app.js`: navegação pelas aulas via hash, seleção de dificuldade, sorteio, fixação, persistência local e renderização segura do conteúdo.
-- `js/aulas/aula01.js` a `js/aulas/aula04.js`: descrição da aula e banco de exercícios. Cada arquivo adiciona uma aula a `window.bancoAulas`.
-- `aula02.html`, `aula03.html`, `aula04.html`: atalhos que redirecionam para o índice com a aula selecionada.
-- `arquivosGabaritos/`: material antigo mantido no repositório, não consumido pela interface atual.
+## Estrutura
 
-## Dados das aulas
+- `index.html`: casca da aplicação, controles e rodapé. Um script curto no `<head>` aplica a preferência de tema antes do carregamento do CSS para evitar flash de cores. Os bancos de aula são carregados com `defer` antes de `js/app.js`; mantenha essa ordem.
+- `css/app.css`: layout responsivo, componentes e tokens de cor dos temas claro e escuro.
+- `js/app.js`: navegação por hash, sorteio, fixação, persistência, alternância de tema, realce de sintaxe e renderização segura.
+- `js/aulas/aula01.js` a `js/aulas/aula04.js`: metadados e questões. Cada arquivo acrescenta uma aula a `window.bancoAulas`.
+- `aula02.html`, `aula03.html`, `aula04.html`: páginas de compatibilidade que redirecionam para a aula correspondente no índice. Não duplicar nelas a aplicação.
+- `arquivosGabaritos/`: scripts e páginas legados, preservados mas não consumidos pela interface atual.
 
-Cada arquivo de aula segue este formato:
+## Bancos de questões
+
+Cada banco segue este formato:
 
 ```js
 window.bancoAulas = window.bancoAulas || [];
@@ -34,26 +36,33 @@ window.bancoAulas.push({
 });
 ```
 
-A convenção atual é de 18 questões por aula: seis em cada nível (`facil`, `intermediario`, `avancado`). O seletor também oferece `aleatorio`, que sorteia seis questões de todos os níveis. O sorteio atual não garante a presença de cada nível na rodada.
+Convenção atual: 18 questões por aula, seis em cada nível (`facil`, `intermediario`, `avancado`). O valor `aleatorio` é uma opção do seletor, não um nível armazenado na questão. IDs de aula devem ser únicos; questões são referenciadas pela posição no array do banco, portanto preserve a ordem dos itens ao editar bancos existentes.
 
-Para adicionar uma aula, criar `js/aulas/aulaNN.js` seguindo o formato e incluir seu `<script defer>` em `index.html` antes de `js/app.js`. O controlador deriva a navegação do banco, então não é necessário criar uma página HTML por aula. Preserve IDs únicos e as chaves de nível esperadas.
+Para adicionar uma aula, criar `js/aulas/aulaNN.js` seguindo o formato e adicionar seu `<script defer>` em `index.html` antes de `js/app.js`. A navegação é gerada a partir de `window.bancoAulas`, então não criar uma página específica para a nova aula.
 
-Os gabaritos são exibidos como texto dentro de `<code>` via `textContent`; não os execute na página. Muitos usam `prompt`, `alert` ou `console.log`, apropriados como exemplos para o aluno, mas não para execução automática pelo aplicativo.
+Gabaritos são texto didático que pode usar `prompt`, `alert` e `console.log`. Não executar esses exemplos na interface. O destaque visual de sintaxe é feito pelo tokenizer simples em `js/app.js`, sem biblioteca: spans são criados via DOM e o conteúdo de cada token é definido por `textContent`. Ele oferece realce para os padrões comuns nos exemplos, mas não é um parser completo da linguagem JavaScript. Não substituir a inserção segura por `innerHTML`.
 
-## Comportamentos importantes
+## Comportamentos e persistência
 
-- A aula ativa é representada pelo hash, por exemplo `index.html#aula03`.
-- Uma rodada contém até seis itens, ordenados pela posição no banco da aula.
-- A opção de fixar grava os IDs selecionados e a preferência de dificuldade no `localStorage`, por aula e nível. A opção de sortear fica desativada enquanto a rodada está fixada.
-- O botão individual e o botão global controlam a visibilidade dos gabaritos; ao trocar a rodada, as respostas começam ocultas.
-- Use APIs DOM e `textContent` para inserir textos e respostas, evitando interpretação de HTML vindo dos bancos.
-- As páginas de atalho das aulas 02 a 04 redirecionam ao índice. Não recriar nelas uma segunda cópia da interface ou dos exercícios.
+- A aula atual é identificada pelo hash, por exemplo `index.html#aula03`.
+- Cada rodada seleciona até seis questões e as exibe na ordem original do banco. Níveis Fácil, Intermediário e Avançado selecionam do grupo correspondente; Aleatório seleciona do conjunto inteiro.
+- Aleatório não garante uma questão de cada nível. Para exigir uma distribuição balanceada, alterar `drawQuestions()` em `js/app.js` e testar a distribuição.
+- A fixação impede novo sorteio e persiste a seleção no `localStorage`. O array salvo contém índices das questões, não IDs individuais. As chaves são `pratica-js:<aulaId>:<nivel>` para índices, `pratica-js:<aulaId>:<nivel>:fixada` para o estado fixado e `pratica-js:<aulaId>:dificuldade` para a preferência de nível da aula.
+- As respostas começam ocultas ao renderizar uma rodada. Há controle por questão e controle global para mostrar/ocultar todas.
+- O modo começa escuro se ainda não houver escolha salva. O botão do cabeçalho alterna claro/escuro e grava `pratica-js:tema` no `localStorage`. O script de inicialização em `index.html` também sincroniza `data-theme` e `meta theme-color` antes do CSS.
+- A identidade visual usa roxo e rosa. Em `css/app.css`, `--accent`/`--accent-soft` representam o roxo e `--pink`/`--pink-soft` representam o rosa; evite introduzir novamente cores verdes como cor de marca.
+- Blocos de código mantêm o fundo escuro em ambos os temas e usam cores inspiradas no tema Dark+ do VS Code: roxo para palavras-chave, laranja para strings, verde para comentários, azul para literais, verde-água para APIs e amarelo para chamadas de função. Em celular, linhas compridas devem rolar dentro do bloco, não alargar a página.
+- Use APIs DOM e `textContent` para inserir textos e respostas. Conteúdo vindo dos bancos não deve ser interpretado como HTML.
+- O rodapé mantém centralizada a frase `APRENDER É FAZER, TESTAR E TENTAR DE NOVO.`, com assinatura de Káthia Rocha, ícone de LinkedIn e ícone de GitHub para o repositório.
+  - LinkedIn: `https://www.linkedin.com/in/kathiarochasa/`
+  - GitHub: `https://github.com/techcomkathia/gabaritosLogicaJs`
+- O aviso de direitos autorais comunica autoria e atribuição, mas não substitui uma licença que defina permissões de reutilização.
 
 ## Executar e validar
 
-Não há dependências de build. Abrir `index.html` diretamente em um navegador é suficiente; os estilos das fontes externas podem precisar de conexão com a internet.
+Não há etapa de build. Abrir `index.html` diretamente em um navegador é suficiente. As fontes DM Sans, Space Grotesk e DM Mono vêm do Google Fonts; sem conexão, o navegador usa fontes substitutas.
 
-Checagens disponíveis com Node.js no PowerShell:
+Checagens de sintaxe com Node.js no PowerShell:
 
 ```powershell
 node --check js/app.js
@@ -63,11 +72,11 @@ node --check js/aulas/aula03.js
 node --check js/aulas/aula04.js
 ```
 
-Também validar que cada aula tenha 18 questões, seis por nível e gabarito não vazio. No navegador, verificar navegação por hash, filtros, sorteio, fixação após recarregar e abrir/fechar respostas em desktop e celular.
+Validar também que cada aula tenha 18 questões, seis por nível, com enunciado e gabarito não vazios. No navegador, conferir navegação por hash, filtros, distribuição aleatória, fixação após recarregar, abrir/fechar respostas, persistência dos dois temas e largura móvel com um gabarito longo aberto.
 
-## Estado e limites conhecidos
+## Limites conhecidos
 
-- O conteúdo ativo representa quatro aulas: dados e cálculos, condicionais, repetição com `while` e repetição com `for`. Não assumir que todo o módulo de JS já foi cadastrado.
-- `aleatorio` escolhe seis questões sem balanceamento garantido entre os níveis. Se o produto passar a exigir níveis mistos em toda rodada, alterar `drawQuestions()` em `js/app.js` e validar a nova distribuição.
-- Os arquivos em `arquivosGabaritos/` são históricos e não foram reconciliados com os novos bancos. Ao migrar ou remover esse material, comparar os gabaritos e preservar conteúdo ainda útil.
-- As soluções novas são exemplos didáticos e podem pressupor entradas válidas; não há validador automático de respostas ou execução isolada de código.
+- Conteúdo ativo: Aula 01, dados e cálculos; Aula 02, decisões e condicionais; Aula 03, repetição com `while`; Aula 04, repetição com `for`. Não presumir que todo o módulo de JavaScript já foi cadastrado.
+- Os bancos novos não foram totalmente reconciliados com o material histórico em `arquivosGabaritos/`. Antes de migrar ou remover scripts antigos, comparar gabaritos e preservar conteúdo que ainda seja útil.
+- Soluções podem pressupor entradas válidas. A aplicação não valida respostas dos alunos nem executa gabaritos em sandbox.
+- O tokenizer de sintaxe é propositalmente pequeno e baseado em expressões regulares; não ampliar para uma linguagem completa sem adotar um parser ou biblioteca de highlighting.
